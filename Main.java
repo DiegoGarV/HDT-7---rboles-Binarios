@@ -47,6 +47,7 @@ public class Main {
                 && !targetLanguage.equals("french")) {
             throw new IllegalArgumentException("El idioma de destino debe ser 'english', 'spanish' o 'french'.");
         }
+        System.out.println("A continuación se muestra la traducción en la línea correspondiente al idioma origen (mostrados en pantalla):");
 
         System.out.println(lector.lectura(dictionary, sourceLanguage, targetLanguage));
         scanner.close();
