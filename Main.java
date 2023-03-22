@@ -18,7 +18,7 @@ public class Main {
 
         // Imprimir inorden
         lector.lecturaDic(dictionary);
-        List<String> lines = dictionary.getInOrderTraversal();
+        List<String> lines = dictionary.getInOrder();
         System.out.println("----------------------------------------------------------------------------------------");
         System.out.println("                                Imprimir Diccionario     ");
         System.out.println("----------------------------------------------------------------------------------------");
