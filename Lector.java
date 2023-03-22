@@ -53,6 +53,7 @@ public class Lector {
             spanishBST.put(parts[1].toLowerCase(), association);
             frenchBST.put(parts[2].toLowerCase(), association);
         }
-        reader.close();
+        reader.close(); 
     }
+    
 }

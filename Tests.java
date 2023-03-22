@@ -51,4 +51,5 @@ public class Tests {
         String actual3 = translator.translateWord(text3, "french", "english");
         assertEquals(expected3, actual3);
     }
+    
 }
