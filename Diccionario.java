@@ -11,30 +11,29 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class Diccionario {
+    // Árboles para cada uno de los idiomas
     protected BinarySearchTree<String, Association<String, String>> englishBST;
     protected BinarySearchTree<String, Association<String, String>> spanishBST;
     protected BinarySearchTree<String, Association<String, String>> frenchBST;
 
     public Diccionario() {
+        // Crea los árboles para cada idioma
         englishBST = new BinarySearchTree<>();
         spanishBST = new BinarySearchTree<>();
         frenchBST = new BinarySearchTree<>();
     }
 
-    public List<String> getInOrderTraversal() {
-        List<String> lines = new ArrayList<>();
-        for (String key : englishBST.keys()) {
-            Association<String, String> association = englishBST.search(key);
-            String englishWord = association.getKey();
-            String spanishWord = association.getValue();
-            String frenchWord = association.getValue2();
-            String line = String.format("%-20s | %-20s | %-20s | %-20s", englishWord, spanishWord, englishWord,
-                    frenchWord);
-            lines.add(line);
-        }
-        return lines;
+     // Añade cada palabra a la asociación
+     public void addWord(String englishWord, String spanishWord, String frenchWord) {
+        englishBST.put(englishWord.toLowerCase(), new Association<String, String>(englishWord.toLowerCase(),
+                spanishWord.toLowerCase(), frenchWord.toLowerCase()));
+        spanishBST.put(spanishWord.toLowerCase(), new Association<String, String>(englishWord.toLowerCase(),
+                spanishWord.toLowerCase(), frenchWord.toLowerCase()));
+        frenchBST.put(frenchWord.toLowerCase(), new Association<String, String>(englishWord.toLowerCase(),
+                spanishWord.toLowerCase(), frenchWord.toLowerCase()));
     }
-
+    
+    // Toma la línea de texto en texto.txt, y la divide en palabras, para luego llamar al método translateWord para traducir cada palabra a partir del idioma origen y destino que seleccione el usuario.
     public String translateLine(String line, String sourceLanguage, String targetLanguage) {
         StringBuilder translatedLine = new StringBuilder();
         String[] words = line.split("\\s+");
@@ -50,15 +49,7 @@ public class Diccionario {
         return translatedLine.toString();
     }
 
-    public void addWord(String englishWord, String spanishWord, String frenchWord) {
-        englishBST.put(englishWord.toLowerCase(), new Association<String, String>(englishWord.toLowerCase(),
-                spanishWord.toLowerCase(), frenchWord.toLowerCase()));
-        spanishBST.put(spanishWord.toLowerCase(), new Association<String, String>(englishWord.toLowerCase(),
-                spanishWord.toLowerCase(), frenchWord.toLowerCase()));
-        frenchBST.put(frenchWord.toLowerCase(), new Association<String, String>(englishWord.toLowerCase(),
-                spanishWord.toLowerCase(), frenchWord.toLowerCase()));
-    }
-
+    //Utiliza los BST para buscar la traducción de la palabra en el idioma origen, al igual que en el idioma destino.
     public String translateWord(String text, String sourceLanguage, String targetLanguage) {
         StringBuilder result = new StringBuilder();
 
@@ -111,5 +102,21 @@ public class Diccionario {
         }
         return result.toString().trim();
 
+    }
+
+    // Realiza el recorrido inorder del árbol, mostrando las asociaciones de las
+    // palabras en ingles en los demás idiomas.
+    public List<String> getInOrder() {
+        List<String> lines = new ArrayList<>();
+        for (String key : englishBST.keys()) { // English: key; Spanish, English, French: value
+            Association<String, String> association = englishBST.search(key); // Asocia cada valor a la llave
+            String englishWord = association.getKey();
+            String spanishWord = association.getValue();
+            String frenchWord = association.getValue2();
+            String line = String.format("%-20s | %-20s | %-20s | %-20s", englishWord, spanishWord, englishWord,
+                    frenchWord);
+            lines.add(line);
+        }
+        return lines;
     }
 }
