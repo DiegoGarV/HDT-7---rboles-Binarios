@@ -10,20 +10,34 @@
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+ * Clase que representa un diccionario que permite traducir palabras entre los idiomas inglés, español y francés.
+ */
+
 public class Diccionario {
     // Árboles para cada uno de los idiomas
     protected BinarySearchTree<String, Association<String, String>> englishBST;
     protected BinarySearchTree<String, Association<String, String>> spanishBST;
     protected BinarySearchTree<String, Association<String, String>> frenchBST;
 
+    /**
+     * Constructor que crea los árboles para cada idioma.
+     */
+
     public Diccionario() {
-        // Crea los árboles para cada idioma
+
         englishBST = new BinarySearchTree<>();
         spanishBST = new BinarySearchTree<>();
         frenchBST = new BinarySearchTree<>();
     }
 
-     // Añade cada palabra a la asociación
+    /**
+      * Método que añade una palabra y su traducción en los tres idiomas al diccionario.
+      * @param englishWord la palabra en inglés.
+      * @param spanishWord la palabra en español.
+      * @param frenchWord la palabra en francés.
+      */
+
      public void addWord(String englishWord, String spanishWord, String frenchWord) {
         englishBST.put(englishWord.toLowerCase(), new Association<String, String>(englishWord.toLowerCase(),
                 spanishWord.toLowerCase(), frenchWord.toLowerCase()));
@@ -33,7 +47,14 @@ public class Diccionario {
                 spanishWord.toLowerCase(), frenchWord.toLowerCase()));
     }
     
-    // Toma la línea de texto en texto.txt, y la divide en palabras, para luego llamar al método translateWord para traducir cada palabra a partir del idioma origen y destino que seleccione el usuario.
+    /**
+     * Método que toma una línea de texto en un archivo de texto (texto.txt) y la traduce palabra por palabra a partir del idioma origen y destino especificados.
+     * @param line la línea de texto a traducir.
+     * @param sourceLanguage el idioma de origen.
+     * @param targetLanguage el idioma de destino.
+     * @return la línea de texto traducida.
+     */
+
     public String translateLine(String line, String sourceLanguage, String targetLanguage) {
         StringBuilder translatedLine = new StringBuilder();
         String[] words = line.split("\\s+");
@@ -55,7 +76,14 @@ public class Diccionario {
         }
     }
 
-    //Utiliza los BST para buscar la traducción de la palabra en el idioma origen, al igual que en el idioma destino.
+    /**
+     * Método que busca la traducción de una palabra a partir del idioma origen y destino especificados.
+     * @param text la palabra a traducir.
+     * @param sourceLanguage el idioma de origen.
+     * @param targetLanguage el idioma de destino.
+     * @return la palabra traducida, o null si no se encontró una traducción.
+     */
+    
     public String translateWord(String text, String sourceLanguage, String targetLanguage) {
         StringBuilder result = new StringBuilder();
 
@@ -110,8 +138,12 @@ public class Diccionario {
 
     }
 
-    // Realiza el recorrido inorder del árbol, mostrando las asociaciones de las
-    // palabras en ingles en los demás idiomas.
+    /**
+    * Realiza el recorrido inorder del árbol, mostrando las asociaciones de las palabras en ingles en los demás idiomas.
+    *
+    * @return una lista de cadenas de texto con las asociaciones de las palabras en inglés y en otros idiomas.
+    */
+    
     public List<String> getInOrder() {
         List<String> lines = new ArrayList<>();
         for (String key : englishBST.keys()) { // English: key; Spanish, English, French: value

@@ -6,7 +6,14 @@ import java.util.logging.Logger;
 public class Lector {    
 
 
-    // Leer archivo de texto
+    /**
+    Lee un archivo de texto y traduce cada línea utilizando el diccionario provisto.
+    @param dictionary el diccionario a utilizar para la traducción.
+    @param sourceLanguage el idioma origen del texto.
+    @param targetLanguage el idioma destino de la traducción.
+    @return una cadena de texto con todas las líneas del archivo traducidas.
+    */
+
     public String lectura(Diccionario dictionary, String sourceLanguage, String targetLanguage){
         StringBuilder sb = new StringBuilder();
         try (BufferedReader br = new BufferedReader(new FileReader("texto.txt"))) {
@@ -21,7 +28,11 @@ public class Lector {
         return sb.toString();
     }
 
-    // Leer archivo de diccionario
+    /**
+    Lee un archivo de diccionario y agrega las palabras al diccionario provisto.
+    @param dictionary el diccionario a actualizar con las nuevas palabras.
+    */
+    
     public void lecturaDic(Diccionario dictionary){
         Logger logger = Logger.getLogger("MyLogger");
         try (BufferedReader br = new BufferedReader(new FileReader("diccionario.txt"))) {
