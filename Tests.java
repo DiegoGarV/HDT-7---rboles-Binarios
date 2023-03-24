@@ -32,24 +32,25 @@ public class Tests {
     @Test
     public void testTranslateWord() {
         Diccionario translator = new Diccionario();
-        
-        // Traducción de ingles a español
-        String text1 = "My house";
-        String expected1 = "*My* casa";
-        String actual1 = translator.translateWord(text1, "english", "spanish");
-        assertEquals(expected1, actual1);
-        
+
+        translator.addWord("house", "casa", "loger");
+        translator.addWord("dog", "perro", "chien");
+        translator.addWord("woman", "mujer", "femme");
+
+        // Prueba traducir una oración del inglés al español
+        String result = translator.translateWord("My house", "english", "spanish");
+        String expected = "*My* casa";
+        assertEquals(expected, result);
+
         // Traducción de español a frances
-        String text2 = "El perro";
-        String expected2 = "*Hola* amigo";
-        String actual2 = translator.translateWord(text2, "spanish", "french");
-        assertEquals(expected2, actual2);
-        
+        String result1 = translator.translateWord("El perro", "spanish", "french");
+        String expected1 = "*El* chien";
+        assertEquals(expected1,result1);
+
         // Traducción de frances a ingles
-        String text3 = "Beautiful woman";
-        String expected3 = "*Beautiful* femme";
-        String actual3 = translator.translateWord(text3, "french", "english");
-        assertEquals(expected3, actual3);
+        String result2 = translator.translateWord("Belle femme", "french", "english");
+        String expected2 = "*Belle* woman";
+        assertEquals(expected2,result2);
     }
     
 }
