@@ -46,7 +46,13 @@ public class Diccionario {
                 translatedLine.append(translatedWord).append(" ");
             }
         }
-        return translatedLine.toString();
+        if (words[0].trim().toLowerCase().equals(sourceLanguage + ":")){ 
+            return translatedLine.toString();
+        }
+        else{
+            String t="";
+            return t;
+        }
     }
 
     //Utiliza los BST para buscar la traducción de la palabra en el idioma origen, al igual que en el idioma destino.
